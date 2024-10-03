@@ -54,6 +54,10 @@ app-root {
 	gap: 2rem;
 }
 
+.gap-3 {
+	gap: 3rem;
+}
+
 .space-between {
 	justify-content: space-between;
 }

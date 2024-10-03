@@ -1,0 +1,18 @@
+
+<button class="hamburger" (click)="toggleMenu()">
+	<span class="line"></span>
+	<span class="line"></span>
+	<span class="line"></span>
+</button>
+
+<p-sidebar [(visible)]="menuOpen" position="top" blockScroll="true" [style]="{'height': '25%'}">
+	<nav [class.show]="menuOpen" class="column">
+		<a routerLink="/" (click)="toggleMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+		<a routerLink="/about-us" (click)="toggleMenu()" routerLinkActive="active">About</a>
+	</nav>
+</p-sidebar>
+
+<nav [class.show]="menuOpen" class="row gap-1 nav-links">
+	<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+	<a routerLink="/about-us" routerLinkActive="active">About</a>
+</nav>

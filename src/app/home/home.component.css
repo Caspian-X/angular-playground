@@ -6,3 +6,13 @@
 
 	box-shadow: 0 0 10px 2.5px rgba(0, 0, 0, 0.2);
 }
+
+.product-row {
+	display: flex;
+	flex-direction: row;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: center;
+	}
+}

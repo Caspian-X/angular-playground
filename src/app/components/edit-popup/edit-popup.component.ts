@@ -4,7 +4,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { Product } from '../../../types';
-import { FormBuilder, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-edit-popup',
@@ -21,7 +21,16 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, ValidatorFn, Validators 
 	styleUrl: './edit-popup.component.css'
 })
 export class EditPopupComponent {
-	constructor(private formBuilder: FormBuilder) { }
+	productForm: FormGroup<any>;
+
+	constructor(private formBuilder: FormBuilder) {
+		this.productForm = this.formBuilder.group({
+			name: ['', [Validators.required, this.specialCharacterValidator()]],
+			image: [''],
+			price: ['', [Validators.required]],
+			rating: [0],
+		})
+	}
 
 	@Input() display: boolean = false;
 	@Input() header!: string;
@@ -44,16 +53,6 @@ export class EditPopupComponent {
 
 			return hasSpecialCharacter ? { hasSpecialCharacter: true } : null;
 		};
-	}
-
-	productForm: any = null;
-	ngOnInit(){
-		this.formBuilder.group({
-			name: ['', [Validators.required, this.specialCharacterValidator()]],
-			image: [''],
-			price: ['', [Validators.required]],
-			rating: [0],
-		})
 	}
 
 	ngOnChanges() {
