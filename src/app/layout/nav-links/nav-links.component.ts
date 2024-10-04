@@ -13,7 +13,7 @@ export class NavLinksComponent {
 	menuOpen = false;
 
 	toggleMenu() {
-	  this.menuOpen = !this.menuOpen;
+	  	this.menuOpen = !this.menuOpen;
 	}
 
 	closeMenu() {

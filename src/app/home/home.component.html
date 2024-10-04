@@ -11,12 +11,23 @@
 	<!-- Products Section -->
 	<!-- removed space-between class from this element that was in the tutorial -->
 	<div class="product-row wrap gap-3">
+		<!-- Directive example -->
 		<app-product
 			*ngFor="let product of products"
 			[product]="product"
 			(edit)="toggleEditPopup($event)"
 			(delete)="toggleDeletePopup($event)"
 		></app-product>
+		<!-- Loop example -->
+		<!--
+		@for (product of products; track product.id) {
+			<app-product
+				[product]="product"
+				(edit)="toggleEditPopup($event)"
+				(delete)="toggleDeletePopup($event)"
+			></app-product>
+		}
+		-->
 	</div>
 
 	<!-- Paginator -->

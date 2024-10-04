@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { PricePipe } from '../../pipes/price.pipe';
 import { TruncateNamePipe } from '../../pipes/truncate-name.pipe';
+import { BrowserService } from '../../services/browser.service';
 
 @Component({
   selector: 'app-product',
@@ -24,13 +25,25 @@ import { TruncateNamePipe } from '../../pipes/truncate-name.pipe';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-	constructor(private confirmationService: ConfirmationService) { }
+
+	constructor(
+		private confirmationService: ConfirmationService,
+		private browserService: BrowserService) { }
 
 	@ViewChild('deleteButton') deleteButton: any;
 
 	@Input() product!: Product;
 	@Output() edit: EventEmitter<Product> = new EventEmitter<Product>();
 	@Output() delete: EventEmitter<Product> = new EventEmitter<Product>();
+
+	currentRole = "user";
+
+	ngOnInit() {
+		this.browserService.getRoleObservable().subscribe({
+			next: (value) => this.currentRole = value,
+			complete: () => { },
+		});
+	}
 
 	editProduct() {
 		this.edit.emit(this.product);
@@ -48,8 +61,5 @@ export class ProductComponent {
 
 	deleteProduct() {
 		this.delete.emit(this.product);
-	}
-
-	ngOnInit() {
 	}
 }
