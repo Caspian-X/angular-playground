@@ -1,4 +1,14 @@
 {
-	"editor.formatOnSave": false,
-	"amazonQ.telemetry": false
+	"editor.formatOnSave": true,
+	"amazonQ.telemetry": false,
+	"editor.defaultFormatter": "EditorConfig.EditorConfig",
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	}
 }

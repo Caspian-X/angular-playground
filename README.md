@@ -34,7 +34,24 @@ This is how I went about learning Angular.
 	OR
 	@for (product of products; track product.id) {
 	```
-- Conditional rendering example: [html](./src/app/components/product/product.component.html), [TS](./src/app/components/product/product.component.ts). [Implementation](./src/app/services/browser.service.ts) (rxjs example).
+- Conditional rendering (control flow) example: [html](./src/app/components/product/product.component.html), [TS](./src/app/components/product/product.component.ts). [Implementation](./src/app/services/browser.service.ts) (rxjs example).
+- Input/Output binding example: [implementation](./src/app/components/product/product.component.ts), [usage](./src/app/home/home.component.html).
+
+	implementation
+	```ts
+	@Input() product!: Product;
+	@Output() edit: EventEmitter<Product> = new EventEmitter<Product>();
+	@Output() delete: EventEmitter<Product> = new EventEmitter<Product>();
+	```
+	usage
+	```html
+	<app-product
+		*ngFor="let product of products"
+		[product]="product"
+		(edit)="toggleEditPopup($event)"
+		(delete)="toggleDeletePopup($event)"
+	></app-product>
+	```
 
 ## Other
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
