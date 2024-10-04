@@ -10,25 +10,26 @@ import { TruncateNamePipe } from '../../pipes/truncate-name.pipe';
 import { BrowserService } from '../../services/browser.service';
 
 @Component({
-  selector: 'app-product',
-  standalone: true,
-  imports: [
-	RatingModule,
-	FormsModule,
-	ButtonModule,
-	ConfirmPopupModule,
-	PricePipe,
-	TruncateNamePipe,
-  ],
-  providers: [ ConfirmationService ],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+	selector: 'app-product',
+	standalone: true,
+	imports: [
+		RatingModule,
+		FormsModule,
+		ButtonModule,
+		ConfirmPopupModule,
+		PricePipe,
+		TruncateNamePipe,
+	],
+	providers: [ConfirmationService],
+	templateUrl: './product.component.html',
+	styleUrl: './product.component.css'
 })
 export class ProductComponent {
 
 	constructor(
 		private confirmationService: ConfirmationService,
-		private browserService: BrowserService) { }
+		private browserService: BrowserService
+	) { }
 
 	@ViewChild('deleteButton') deleteButton: any;
 

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
 import { EditPopupComponent } from "../components/edit-popup/edit-popup.component";
 import { ButtonModule } from 'primeng/button';
+import { BrowserService } from '../services/browser.service';
 
 @Component({
 	selector: 'app-home',
@@ -17,7 +18,8 @@ import { ButtonModule } from 'primeng/button';
 export class HomeComponent {
 
 	constructor(
-		private productsService: ProductsService
+		private productsService: ProductsService,
+		private browserService: BrowserService,
 	) { }
 
 	@ViewChild('paginator') paginator: Paginator | undefined;
@@ -28,6 +30,24 @@ export class HomeComponent {
 
 	displayEditPopup: boolean = false;
 	displayAddPopup: boolean = false;
+
+	selectedProduct: Product = {
+		id: 0,
+		name: '',
+		image: '',
+		price: '',
+		rating: 0,
+	}
+
+	currentRole = "user";
+
+	ngOnInit() {
+		this.fetchProducts(0, this.rows);
+		this.browserService.getRoleObservable().subscribe({
+			next: (value) => this.currentRole = value,
+			complete: () => { },
+		});
+	}
 
 	toggleEditPopup(product: Product) {
 		this.selectedProduct = product;
@@ -44,14 +64,6 @@ export class HomeComponent {
 
 	toggleAddPopup() {
 		this.displayAddPopup = true;
-	}
-
-	selectedProduct: Product = {
-		id: 0,
-		name: '',
-		image: '',
-		price: '',
-		rating: 0,
 	}
 
 	onConfirmEdit(product: Product) {
@@ -101,9 +113,5 @@ export class HomeComponent {
 	deleteProduct(productId: number) {
 		this.productsService.deleteItem(productId);
 		this.resetPaginator();
-	}
-
-	ngOnInit() {
-		this.fetchProducts(0, this.rows);
 	}
 }

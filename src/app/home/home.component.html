@@ -1,12 +1,14 @@
 <div class="column gap-1">
-	<button
-		type="button"
-		pButton
-		icon="pi pi-plus"
-		(click)="toggleAddPopup()"
-		label="Add Product"
-		class="add-product-btn"
-	></button>
+	@if (currentRole === 'admin') {
+		<button
+			type="button"
+			pButton
+			icon="pi pi-plus"
+			(click)="toggleAddPopup()"
+			label="Add Product"
+			class="add-product-btn"
+		></button>
+	}
 
 	<!-- Products Section -->
 	<!-- removed space-between class from this element that was in the tutorial -->
