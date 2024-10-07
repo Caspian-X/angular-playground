@@ -7,6 +7,7 @@ import { Paginator, PaginatorModule } from 'primeng/paginator';
 import { EditPopupComponent } from "../components/edit-popup/edit-popup.component";
 import { ButtonModule } from 'primeng/button';
 import { BrowserService } from '../services/browser.service';
+import { NEW_IMAGE_TEXT } from '../common/constants';
 
 @Component({
 	selector: 'app-home',
@@ -26,7 +27,8 @@ export class HomeComponent {
 
 	products: Product[] = [];
 	totalRecords: number = 0;
-	rows = 5
+	rows = 5;
+	defaultImageText = NEW_IMAGE_TEXT;
 
 	displayEditPopup: boolean = false;
 	displayAddPopup: boolean = false;
@@ -70,7 +72,6 @@ export class HomeComponent {
 		if (!this.selectedProduct.id) {
 			return;
 		}
-
 		this.editProduct(product, this.selectedProduct.id);
 		this.displayEditPopup = false;
 	}
@@ -98,7 +99,7 @@ export class HomeComponent {
 	}
 
 	editProduct(product: Product, id: number) {
-		if (!product.id) {
+		if (!id) {
 			throw new Error('Cannot edit product without id');
 		}
 		this.productsService.updateItem(id, product.image, product.name, product.price, product.rating);

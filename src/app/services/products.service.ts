@@ -10,7 +10,9 @@ export class ProductsService {
 	constructor() { }
 
 	getProducts(page: number, perPage: number): Product[] {
-		return dummyProducts.slice(page * perPage, (page + 1) * perPage);
+		return dummyProducts
+			.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
+			.slice(page * perPage, (page + 1) * perPage);
 	}
 
 	getAllProducts(): Product[] {

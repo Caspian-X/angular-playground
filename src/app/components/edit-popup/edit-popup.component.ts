@@ -34,6 +34,7 @@ export class EditPopupComponent {
 
 	@Input() display: boolean = false;
 	@Input() header!: string;
+	@Input() defaultImageText?: string;
 	@Output() displayChange = new EventEmitter<boolean>();
 	@Output() confirm = new EventEmitter<Product>();
 	@Output() cancel = new EventEmitter<void>();
@@ -43,6 +44,11 @@ export class EditPopupComponent {
 		image: '',
 		price: '',
 		rating: 0,
+	}
+
+	ngOnInit() {
+		this.product.image = this.defaultImageText ? this.defaultImageText : 'bob';
+		this.productForm.patchValue(this.product);
 	}
 
 	specialCharacterValidator(): ValidatorFn {

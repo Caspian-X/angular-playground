@@ -24,7 +24,7 @@
 
 	<!-- Footer with action buttons -->
 	<p-footer>
-		<button type="button" pButton icon="pi pi-check" (click)="onConfirm()" label="Confirm" [class.disabled]="!productForm.valid"></button>
-		<button type="button" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel"></button>
+		<button type="button" class="cancel-btn" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel"></button>
+		<button type="button" class="confirm-btn" pButton icon="pi pi-check" (click)="onConfirm()" label="Confirm" [class.disabled]="!productForm.valid"></button>
 	</p-footer>
 </p-dialog>
