@@ -46,7 +46,9 @@
 <!-- Edit Product -->
 <app-edit-popup
 	[product]="selectedProduct"
+	[allProducts]="allProducts"
 	[(display)]="displayEditPopup"
+	[images]="images"
 	(confirm)="onConfirmEdit($event)"
 	header="Edit Product"
 ></app-edit-popup>
@@ -54,7 +56,9 @@
 <!-- Add Product -->
 <app-edit-popup
 	[(display)]="displayAddPopup"
+	[allProducts]="allProducts"
 	(confirm)="onConfirmAdd($event)"
+	[images]="images"
 	[defaultImageText]="defaultImageText"
 	header="Add Product"
 ></app-edit-popup>

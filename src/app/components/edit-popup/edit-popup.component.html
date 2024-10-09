@@ -15,7 +15,14 @@
 		<!-- Image -->
 		<div class="row gap-05">
 			<span class="price-label">Image:</span>
-			<input type="text" formControlName="image" />
+			<p-dropdown
+				[options]="images"
+				optionLabel="name"
+				[filter]="true"
+				formControlName="selectedImage"
+				appendTo="body"
+				variant="filled"
+				placeholder="Select an image" />
 		</div>
 
 		<!-- Rating -->

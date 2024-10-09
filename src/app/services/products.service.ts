@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../types';
+import { Image, Product } from '../../types';
 import { dummyProducts } from '../../dummyData';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class ProductsService {
 		return dummyProducts;
 	}
 
-	addItem(image: string, name: string, price: string, rating: number): Product | null {
+	addItem(image: Image, name: string, price: string, rating: number): Product | null {
 		const maxId = dummyProducts.reduce((max: number, item: Product) => Math.max(max, item.id!), 0);
 
 		const newItem: Product = {
@@ -32,7 +32,7 @@ export class ProductsService {
 		return null;
 	}
 
-	updateItem(id: number, image: string, name: string, price: string, rating: number): void {
+	updateItem(id: number, image: Image, name: string, price: string, rating: number): void {
 		const index = dummyProducts.findIndex((item: Product) => item.id === id);
 
 		if (index === -1) {

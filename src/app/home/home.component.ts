@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProductsService } from '../services/products.service';
-import { Product } from '../../types';
+import { Image, Product } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
@@ -25,6 +25,7 @@ export class HomeComponent {
 
 	@ViewChild('paginator') paginator: Paginator | undefined;
 
+	allProducts: Product[] = [];
 	products: Product[] = [];
 	totalRecords: number = 0;
 	rows = 5;
@@ -36,12 +37,17 @@ export class HomeComponent {
 	selectedProduct: Product = {
 		id: 0,
 		name: '',
-		image: '',
+		image: {
+			name: '',
+			url: '',
+		},
 		price: '',
 		rating: 0,
 	}
 
 	currentRole = "user";
+
+	images: Image[] = [];
 
 	ngOnInit() {
 		this.fetchProducts(0, this.rows);
@@ -49,6 +55,7 @@ export class HomeComponent {
 			next: (value) => this.currentRole = value,
 			complete: () => { },
 		});
+		this.images = this.allProducts.map((product) => product.image);
 	}
 
 	toggleEditPopup(product: Product) {
@@ -95,10 +102,12 @@ export class HomeComponent {
 
 	fetchProducts(page: number, perPage: number) {
 		this.products = this.productsService.getProducts(page, perPage);
-		this.totalRecords = this.productsService.getAllProducts().length;
+		this.allProducts = this.productsService.getAllProducts();
+		this.totalRecords = this.allProducts.length;
 	}
 
 	editProduct(product: Product, id: number) {
+		console.log("editing product:", product)
 		if (!id) {
 			throw new Error('Cannot edit product without id');
 		}
