@@ -111,4 +111,34 @@ export const dummyProducts: Product[] = [
 		},
 		rating: 4.5,
 	},
+	{
+		id: 12,
+		price: "1.99",
+		name: "Cottage Cheese",
+		image: {
+			name: "Cottage Cheese",
+			url: "assets/images/products/cottage-cheese.jpeg",
+		},
+		rating: 4.3,
+	},
+	{
+		id: 13,
+		price: "3.99",
+		name: "Chicken Nuggets",
+		image: {
+			name: "Chicken Nuggets",
+			url: "assets/images/products/chicken-nuggets.jpg",
+		},
+		rating: 4.7,
+	},
+	{
+		id: 14,
+		price: "10.99",
+		name: "Ribs",
+		image: {
+			name: "Ribs",
+			url: "assets/images/products/ribs.jpeg",
+		},
+		rating: 4.8,
+	},
 ];
