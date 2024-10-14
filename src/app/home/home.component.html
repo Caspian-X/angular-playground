@@ -1,15 +1,4 @@
 <div class="column gap-1">
-	@if (currentRole === 'admin') {
-		<button
-			type="button"
-			pButton
-			icon="pi pi-plus"
-			(click)="toggleAddPopup()"
-			label="Add Product"
-			class="add-product-btn"
-		></button>
-	}
-
 	<div class="products-search-container">
 		<div class="filter-area">
 			<h1 class="flex-center">
@@ -31,6 +20,17 @@
 			<h1 class="flex-center">
 				Products
 			</h1>
+			@if (currentRole === 'admin') {
+				<div class="add-product-btn-container flex-center">
+					<button
+						type="button"
+						pButton
+						icon="pi pi-plus"
+						(click)="toggleAddPopup()"
+						label="Add Product"
+					></button>
+				</div>
+			}
 			<!-- removed space-between class from this element that was in the tutorial -->
 			<div class="product-row wrap gap-3">
 				<!-- Directive example -->
@@ -40,13 +40,6 @@
 					(edit)="toggleEditPopup($event)"
 					(delete)="toggleDeletePopup($event)"
 				></app-product>
-				@if ((currentPage * rows) < activeProducts.length) {
-					<div class="dots-container">
-						<div class="dot" id="dot1"></div>
-						<div class="dot" id="dot2"></div>
-						<div class="dot" id="dot3"></div>
-					</div>
-				}
 				<!-- Loop example -->
 				<!--
 				@for (product of products; track product.id) {
@@ -57,6 +50,13 @@
 					></app-product>
 				}
 				-->
+				@if ((currentPage * rows) < activeProducts.length) {
+					<div class="dots-container">
+						<div class="dot" id="dot1"></div>
+						<div class="dot" id="dot2"></div>
+						<div class="dot" id="dot3"></div>
+					</div>
+				}
 		</div>
 		</div>
 	</div>

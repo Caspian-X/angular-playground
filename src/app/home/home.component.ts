@@ -120,6 +120,7 @@ export class HomeComponent {
 		this.currentPage = event.page + 1;
 		this.rows = event.rows;
 		this.fetchProducts(event.page, event.rows);
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
 	resetPaginator() {

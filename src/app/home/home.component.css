@@ -1,10 +1,5 @@
-.add-product-btn {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 10;
-
-	box-shadow: 0 0 10px 2.5px rgba(0, 0, 0, 0.2);
+.add-product-btn-container {
+	padding: 1rem 0 0.5rem 0;
 }
 
 .product-row {
@@ -39,14 +34,11 @@
 }
 
 .dot {
-	/* Making them black circular dots */
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	background-color: #000;
-	/* display: inline-block; */
 	margin: 0 5px;
-	/* Spacing between dots */
 }
 
 .dots-container {
@@ -54,5 +46,8 @@
 	padding-top: 125px;
 	justify-content: center;
 	width: 250px;
-	/* Center align for vertical spacing */
+
+	@media (max-width: 768px) {
+		padding: 50px 0;
+	}
 }
