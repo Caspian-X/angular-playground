@@ -130,11 +130,9 @@ export class HomeComponent {
 		this.products = this.productsService.getProducts(this.selectedFiles, page, perPage);
 		this.allProducts = this.productsService.getAllProducts();
 		this.activeProducts = this.productsService.getActiveProducts();
-		console.log(`${this.products.length} < ${this.activeProducts.length}`)
 	}
 
 	editProduct(product: Product, id: number) {
-		console.log("editing product:", product)
 		if (!id) {
 			throw new Error('Cannot edit product without id');
 		}

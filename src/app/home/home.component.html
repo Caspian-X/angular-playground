@@ -40,7 +40,7 @@
 					(edit)="toggleEditPopup($event)"
 					(delete)="toggleDeletePopup($event)"
 				></app-product>
-				@if ((currentPage * products.length) < activeProducts.length) {
+				@if ((currentPage * rows) < activeProducts.length) {
 					<div class="dots-container">
 						<div class="dot" id="dot1"></div>
 						<div class="dot" id="dot2"></div>
