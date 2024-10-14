@@ -99,3 +99,8 @@ app-root {
 	pointer-events: none;
 	opacity: 0.5;
 }
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+}

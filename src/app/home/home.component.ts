@@ -8,15 +8,20 @@ import { EditPopupComponent } from "../components/edit-popup/edit-popup.componen
 import { ButtonModule } from 'primeng/button';
 import { BrowserService } from '../services/browser.service';
 import { NEW_IMAGE_TEXT } from '../common/constants';
+import { TreeModule } from 'primeng/tree';
+import { TreeNode } from 'primeng/api';
 
 @Component({
 	selector: 'app-home',
 	standalone: true,
-	imports: [ProductComponent, CommonModule, PaginatorModule, EditPopupComponent, EditPopupComponent, ButtonModule],
+	imports: [ProductComponent, CommonModule, PaginatorModule, EditPopupComponent, EditPopupComponent, ButtonModule, TreeModule],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+	files!: TreeNode[];
+	selectedFiles!: TreeNode[];
 
 	constructor(
 		private productsService: ProductsService,
@@ -26,9 +31,11 @@ export class HomeComponent {
 	@ViewChild('paginator') paginator: Paginator | undefined;
 
 	allProducts: Product[] = [];
+	activeProducts: Product[] = [];
 	products: Product[] = [];
 	totalRecords: number = 0;
-	rows = 5;
+	currentPage = 0;
+	rows = 7;
 	defaultImageText = NEW_IMAGE_TEXT;
 
 	displayEditPopup: boolean = false;
@@ -50,12 +57,33 @@ export class HomeComponent {
 	images: Image[] = [];
 
 	ngOnInit() {
-		this.fetchProducts(0, this.rows);
+		this.fetchProducts(this.currentPage, this.rows);
 		this.browserService.getRoleObservable().subscribe({
 			next: (value) => this.currentRole = value,
 			complete: () => { },
 		});
 		this.images = this.allProducts.map((product) => product.image);
+
+		// Setup Tree
+		this.files = this.productsService.getFilterTree();
+		// Default to expanded nodes
+		this.files.forEach((node) => {
+			this.expandRecursive(node, true);
+		});
+	}
+
+	treeChangeEvent(event: any) {
+		this.fetchProducts(this.currentPage, this.rows);
+		this.resetPaginator();
+	}
+
+	private expandRecursive(node: TreeNode, isExpand: boolean) {
+		node.expanded = isExpand;
+		if (node.children) {
+			node.children.forEach((childNode) => {
+				this.expandRecursive(childNode, isExpand);
+			});
+		}
 	}
 
 	toggleEditPopup(product: Product) {
@@ -88,12 +116,10 @@ export class HomeComponent {
 		this.displayAddPopup = false;
 	}
 
-	onProductOutput(product: Product) {
-		console.log('output', product);
-	}
-
 	onPageChange(event: any) {
-		this.fetchProducts(event.page, event.rows)
+		this.currentPage = event.page + 1;
+		this.rows = event.rows;
+		this.fetchProducts(event.page, event.rows);
 	}
 
 	resetPaginator() {
@@ -101,9 +127,10 @@ export class HomeComponent {
 	}
 
 	fetchProducts(page: number, perPage: number) {
-		this.products = this.productsService.getProducts(page, perPage);
+		this.products = this.productsService.getProducts(this.selectedFiles, page, perPage);
 		this.allProducts = this.productsService.getAllProducts();
-		this.totalRecords = this.allProducts.length;
+		this.activeProducts = this.productsService.getActiveProducts();
+		console.log(`${this.products.length} < ${this.activeProducts.length}`)
 	}
 
 	editProduct(product: Product, id: number) {

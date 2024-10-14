@@ -5,6 +5,8 @@ export interface Product {
 	name: string;
 	image: Image;
 	rating: number;
+	types?: string[];
+	attributes?: string[];
 }
 
 export interface Image {

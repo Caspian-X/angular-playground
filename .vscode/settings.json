@@ -11,5 +11,8 @@
 	"[jsonc]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
-	"html.format.enable": false
+	"html.format.enable": false,
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	}
 }

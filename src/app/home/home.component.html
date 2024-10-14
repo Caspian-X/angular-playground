@@ -10,33 +10,62 @@
 		></button>
 	}
 
-	<!-- Products Section -->
-	<!-- removed space-between class from this element that was in the tutorial -->
-	<div class="product-row wrap gap-3">
-		<!-- Directive example -->
-		<app-product
-			*ngFor="let product of products"
-			[product]="product"
-			(edit)="toggleEditPopup($event)"
-			(delete)="toggleDeletePopup($event)"
-		></app-product>
-		<!-- Loop example -->
-		<!--
-		@for (product of products; track product.id) {
-			<app-product
-				[product]="product"
-				(edit)="toggleEditPopup($event)"
-				(delete)="toggleDeletePopup($event)"
-			></app-product>
-		}
-		-->
+	<div class="products-search-container">
+		<div class="filter-area">
+			<h1 class="flex-center">
+				Filter
+			</h1>
+			<p-tree
+				[value]="files"
+				selectionMode="checkbox"
+				[(selection)]="selectedFiles"
+				[style]="{'border': 'none', 'padding': '1rem 0 0 0'}"
+				(onNodeSelect)="treeChangeEvent($event)"
+				(onNodeUnselect)="treeChangeEvent($event)"
+			/>
+		</div>
+
+
+		<!-- Products Section -->
+		<div>
+			<h1 class="flex-center">
+				Products
+			</h1>
+			<!-- removed space-between class from this element that was in the tutorial -->
+			<div class="product-row wrap gap-3">
+				<!-- Directive example -->
+				<app-product
+					*ngFor="let product of products"
+					[product]="product"
+					(edit)="toggleEditPopup($event)"
+					(delete)="toggleDeletePopup($event)"
+				></app-product>
+				@if ((currentPage * products.length) < activeProducts.length) {
+					<div class="dots-container">
+						<div class="dot" id="dot1"></div>
+						<div class="dot" id="dot2"></div>
+						<div class="dot" id="dot3"></div>
+					</div>
+				}
+				<!-- Loop example -->
+				<!--
+				@for (product of products; track product.id) {
+					<app-product
+						[product]="product"
+						(edit)="toggleEditPopup($event)"
+						(delete)="toggleDeletePopup($event)"
+					></app-product>
+				}
+				-->
+		</div>
+		</div>
 	</div>
 
 	<!-- Paginator -->
 	<p-paginator
 		[rows]="rows"
-		[totalRecords]="totalRecords"
-		[rowsPerPageOptions]="[5, 10, 20]"
+		[totalRecords]="activeProducts.length"
+		[rowsPerPageOptions]="[7, 15, 23]"
 		[first]="1"
 		(onPageChange)="onPageChange($event)"
 		#paginator

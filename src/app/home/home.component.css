@@ -11,9 +11,48 @@
 	display: flex;
 	flex-direction: row;
 	gap: 2rem;
+	padding-top: 1rem;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 		align-items: center;
 	}
+}
+
+.products-search-container {
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.filter-area {
+	min-width: 14rem;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		justify-items: center;
+	}
+}
+
+.dot {
+	/* Making them black circular dots */
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #000;
+	/* display: inline-block; */
+	margin: 0 5px;
+	/* Spacing between dots */
+}
+
+.dots-container {
+	display: flex;
+	padding-top: 125px;
+	justify-content: center;
+	width: 250px;
+	/* Center align for vertical spacing */
 }
