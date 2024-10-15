@@ -24,6 +24,10 @@
 	}
 }
 
+.products-container {
+	width: 100%;
+}
+
 .filter-area {
 	min-width: 14rem;
 
